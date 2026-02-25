@@ -164,21 +164,24 @@ html, body, #root {
 /* ---- CENTER PANEL ---- */
 .instagram-embed-wrapper {
   width: 100%;
-  max-width: 420px;
+  max-width: 390px;
   height: calc(100vh - 3rem);
   max-height: 680px;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #000;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 8px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04);
 }
 
-.instagram-embed-wrapper .instagram-media {
-  margin: 0 !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  min-width: 0 !important;
-  border-radius: 24px !important;
-  overflow: hidden !important;
+.instagram-iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
 }
 
 .video-card {
@@ -436,8 +439,9 @@ html, body, #root {
   .video-card { max-height: 600px; }
   .instagram-embed-wrapper {
     height: auto;
-    max-height: none;
-    max-width: 540px;
+    max-height: 80vh;
+    max-width: 420px;
+    aspect-ratio: 9 / 16;
   }
   .footstep-btn { width: 120px; height: 120px; }
 }

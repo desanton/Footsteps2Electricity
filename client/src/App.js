@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
 
 function JapanOutline() {
@@ -59,44 +59,20 @@ function LeftPanel({ onGenerate }) {
   );
 }
 
-const INSTAGRAM_PERMALINK = 'https://www.instagram.com/reel/DU_o1n_ElVE/';
+const INSTAGRAM_EMBED_URL = 'https://www.instagram.com/reel/DU_o1n_ElVE/embed';
 
 function CenterPanel() {
-  const embedRef = useRef(null);
-
-  useEffect(() => {
-    const processEmbeds = () => {
-      if (window.instgrm?.Embeds?.process && embedRef.current) {
-        window.instgrm.Embeds.process();
-      }
-    };
-
-    const existingScript = document.querySelector('script[src="https://www.instagram.com/embed.js"]');
-    if (!existingScript) {
-      const script = document.createElement('script');
-      script.src = 'https://www.instagram.com/embed.js';
-      script.async = true;
-      script.onload = processEmbeds;
-      document.body.appendChild(script);
-      return;
-    }
-
-    processEmbeds();
-  }, []);
-
   return (
     <div className="panel panel-center">
-      <div className="instagram-embed-wrapper" ref={embedRef}>
-        <blockquote
-          className="instagram-media"
-          data-instgrm-captioned
-          data-instgrm-permalink={INSTAGRAM_PERMALINK}
-          data-instgrm-version="14"
-        >
-          <a href={INSTAGRAM_PERMALINK} target="_blank" rel="noreferrer">
-            View this post on Instagram
-          </a>
-        </blockquote>
+      <div className="instagram-embed-wrapper">
+        <iframe
+          src={INSTAGRAM_EMBED_URL}
+          title="Instagram Reel"
+          className="instagram-iframe"
+          scrolling="no"
+          allowTransparency="true"
+          allow="autoplay; encrypted-media; picture-in-picture; web-share"
+        />
       </div>
     </div>
   );
@@ -121,7 +97,7 @@ function RightPanel({ electricity, pulse }) {
         </p>
       </div>
       <div className="images-row">
-        <img src="/images/shocked.avif" alt="Shocked face" className="reaction-image" onError={(e) => { e.target.style.display = 'none'; }} />
+        <img src="/images/shocked.png" alt="Shocked face" className="reaction-image" onError={(e) => { e.target.style.display = 'none'; }} />
         <img src="/images/red-arrow.png" alt="Red arrow pointing up" className="reaction-image" />
       </div>
     </div>
