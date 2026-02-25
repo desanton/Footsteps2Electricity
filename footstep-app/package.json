@@ -1,0 +1,27 @@
+{
+  "name": "footstep-app",
+  "version": "1.0.0",
+  "description": "In Japan they are turning footsteps into electricity",
+  "main": "server/index.js",
+  "scripts": {
+    "build": "cd client && npm install && npm run build",
+    "start": "cd server && npm install && node index.js",
+    "dev": "concurrently \"cd server && npm run dev\" \"cd client && npm start\"",
+    "install-all": "npm install && cd client && npm install && cd ../server && npm install"
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "kinetic-energy",
+    "electricity",
+    "japan",
+    "footsteps"
+  ],
+  "author": "",
+  "license": "MIT"
+}
