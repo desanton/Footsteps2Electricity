@@ -1,136 +1,261 @@
-# ⚡ Footstep Electricity Generator
+# ⚡ Footsteps → Electricity
 
-> In Japan, they are turning footsteps into electricity.
+> "In Japan they are turning footsteps into electricity."
 
-A full-stack simulation of kinetic energy generation from footsteps. Click the button → database increments → electricity counter updates in real time.
+A production-ready full-stack web app that simulates generating electricity from footsteps. Click the button → database increments → electricity counter updates in real time.
 
-## Stack
-
-- **Frontend**: React (CRA), functional components, useState + useEffect
-- **Backend**: Express + pg + dotenv + CORS
-- **Database**: PostgreSQL (single row counter)
-- **Deploy**: Railway
+**Stack:** React 18 + Express + PostgreSQL + Railway
 
 ---
 
-## Folder Structure
+## 🎨 Features
+
+- **3-Panel Responsive Layout**: Japan map, video card, live counter
+- **Real-time Updates**: Click to generate electricity, instant DB sync
+- **Beautiful Dark UI**: Gradient buttons, glowing cards, smooth animations
+- **Production Ready**: Deployable to Railway in minutes
+- **Minimal Dependencies**: No Redux, no bloat—just React + Express + PostgreSQL
+
+---
+
+## 📁 Folder Structure
 
 ```
 footstep-app/
-├── client/              # React frontend
+├── client/                    # React frontend (CRA)
 │   ├── public/
-│   │   └── index.html
+│   │   └── index.html        # HTML entry point
 │   ├── src/
-│   │   ├── App.js
-│   │   ├── App.css
-│   │   └── index.js
+│   │   ├── App.js            # Main component (3-panel layout)
+│   │   ├── App.css           # Dark theme styles + animations
+│   │   └── index.js          # React root
 │   └── package.json
-├── server/              # Express backend
-│   ├── index.js
+├── server/                    # Express backend
+│   ├── index.js              # All routes + DB init
 │   └── package.json
-├── schema.sql           # DB schema
-├── package.json         # Root (build + start scripts)
-├── railway.toml         # Railway config
-├── .env.example
-└── .gitignore
+├── .env.example              # Template for env vars
+├── .gitignore                # Git ignore rules
+├── package.json              # Root (shared scripts)
+├── railway.toml              # Railway deployment config
+└── schema.sql                # DB schema (one-time setup)
 ```
 
 ---
 
-## Local Development
+## 🚀 Quick Start (Local Dev)
 
 ### Prerequisites
-- Node.js 18+
-- PostgreSQL running locally
+- **Node.js 18+** ([download](https://nodejs.org))
+- **PostgreSQL 12+** ([download](https://www.postgresql.org/download/))
 
-### 1. Clone & install
+### 1. Setup Database
+
 ```bash
-git clone <your-repo>
+# Create local PostgreSQL database
+createdb footsteps
+
+# Run schema
+psql footsteps < schema.sql
+```
+
+### 2. Clone & Install
+
+```bash
 cd footstep-app
+cp .env.example .env
+
+# Edit .env with your DB URL
+# Example: DATABASE_URL=postgresql://postgres:password@localhost:5432/footsteps
+
 npm install
-cd server && npm install && cd ..
-cd client && npm install && cd ..
 ```
 
-### 2. Set up environment
+### 3. Run Frontend & Backend Together
+
 ```bash
-cp .env.example server/.env
-# Edit server/.env with your local DATABASE_URL
+npm run dev
 ```
 
-### 3. Initialize DB
-```bash
-psql $DATABASE_URL -f schema.sql
-# Or let the server auto-init on first boot
+This starts:
+- **Backend**: `http://localhost:4000` (Express server)
+- **Frontend**: `http://localhost:3000` (React dev server)
+
+The React app will proxy API calls to the backend automatically.
+
+### 4. Test It
+
+- Open [http://localhost:3000](http://localhost:3000)
+- Click the big blue footstep button
+- Watch the electricity counter increment
+
+---
+
+## 🌐 Deploying to Railway
+
+### 1. Prepare GitHub
+
+Ensure your repo is pushed to GitHub with the `footstep-app/` folder at root level:
+```
+repo/
+├── footstep-app/       ← All code here
+└── README.md
 ```
 
-### 4. Run dev servers
-```bash
-# Terminal 1 - Backend (port 4000)
-cd server && npm run dev
+### 2. Create Railway Project
 
-# Terminal 2 - Frontend (port 3000, proxies API to 4000)
-cd client && npm start
+1. Go to [railway.app](https://railway.app)
+2. Click **New Project** → **Deploy from GitHub**
+3. Select your repository
+4. Select the directory: `footstep-app`
+
+### 3. Add PostgreSQL
+
+1. In Railway dashboard, click **+ New**
+2. Add **PostgreSQL** service
+3. Once provisioned, copy the `DATABASE_URL` connection string
+
+### 4. Set Environment Variables
+
+1. In your app service settings, add:
+   - `DATABASE_URL`: Paste from PostgreSQL service
+   - `NODE_ENV`: `production`
+
+2. Railway will auto-link the PostgreSQL plugin, but manually set it if needed.
+
+### 5. Deploy
+
+1. Connect your GitHub repo
+2. Select `footstep-app` as the root directory
+3. Click **Deploy**
+
+Railway will:
+- Run `npm run build` (builds React, installs server deps)
+- Run `npm start` (starts Express server on PORT from Railway)
+- Serve React static files + handle API routes
+
+### 6. Health Check
+
+Once live, test the endpoint:
+```bash
+curl https://your-railway-domain.app/electricity
+```
+
+You should see:
+```json
+{ "electricity": 0 }
 ```
 
 ---
 
-## Deploy to Railway
+## 📡 API Reference
 
-### Step 1 – Push to GitHub
+| Method | Endpoint | Description | Response |
+|--------|----------|-------------|----------|
+| `GET` | `/electricity` | Get current counter | `{ electricity: number }` |
+| `POST` | `/generate` | Increment by 1 | `{ electricity: number }` |
+
+### Example Usage
+
+```javascript
+// Get current value
+fetch('/electricity')
+  .then(r => r.json())
+  .then(d => console.log(d.electricity)); // e.g., 42
+
+// Increment
+fetch('/generate', { method: 'POST' })
+  .then(r => r.json())
+  .then(d => console.log(d.electricity)); // e.g., 43
+```
+
+---
+
+## 🛠️ Development
+
+### Start Dev Mode
 ```bash
-git init
-git add .
-git commit -m "Initial commit"
-git remote add origin https://github.com/YOUR_USERNAME/footstep-app.git
-git push -u origin main
+npm run dev
 ```
+Runs both React dev server and Express with auto-reload.
 
-### Step 2 – Create Railway project
-1. Go to [railway.app](https://railway.app) → **New Project**
-2. Select **Deploy from GitHub repo**
-3. Choose your `footstep-app` repository
-
-### Step 3 – Add PostgreSQL
-1. In your Railway project → **+ New** → **Database** → **PostgreSQL**
-2. Railway auto-creates a `DATABASE_URL` variable
-
-### Step 4 – Configure environment variables
-In your Railway **web service** settings → **Variables**, add:
+### Build for Production
+```bash
+npm run build
 ```
-NODE_ENV=production
-DATABASE_URL=${{Postgres.DATABASE_URL}}   ← Railway reference variable
+Builds React app → `client/build/`
+
+### Start Production Server
+```bash
+npm start
 ```
-
-### Step 5 – Deploy
-Railway auto-deploys on push. The build process:
-1. Runs `npm run build` → builds React into `client/build/`
-2. Runs `npm start` → starts Express which serves the React build + API
-
-### Step 6 – Verify
-- Visit your Railway-provided URL
-- `GET /electricity` should return `{"electricity": 0}`
-- Click the button → `POST /generate` → counter increments
+Serves React static files + API routes on port `$PORT` (Railway sets this).
 
 ---
 
-## API Reference
+## 🎨 Customization
 
-| Method | Path | Description |
-|--------|------|-------------|
-| `GET` | `/electricity` | Returns `{ electricity: number }` |
-| `POST` | `/generate` | Increments by 1, returns updated `{ electricity: number }` |
+### Change Electricity Increment
+
+In [server/index.js](server/index.js), line ~35:
+```javascript
+'UPDATE electricity SET value = value + 1 WHERE id = 1 RETURNING value'
+// Change +1 to +10, +100, etc.
+```
+
+### Change Colors
+
+In [client/src/App.css](client/src/App.css):
+```css
+:root {
+  --blue: #3b82f6;  /* Change to your color */
+  --green: #22c55e; /* Status dot */
+  /* ... */
+}
+```
+
+### Change Button Text
+
+In [client/src/App.js](client/src/App.js), search for "Click to generate electricity" and update.
 
 ---
 
-## DB Schema
+## 🔧 Troubleshooting
 
-```sql
-CREATE TABLE electricity (
-  id SERIAL PRIMARY KEY,
-  value INTEGER NOT NULL DEFAULT 0
-);
--- Single row, id=1, starts at 0
+### "Cannot connect to database"
+- Ensure PostgreSQL is running: `brew services start postgresql`
+- Check `DATABASE_URL` in `.env` matches your setup
+- Run `psql footsteps < schema.sql` again
+
+### "Port 3000/4000 in use"
+```bash
+# Kill existing process
+lsof -ti:3000 | xargs kill -9
+lsof -ti:4000 | xargs kill -9
 ```
 
-The server auto-creates this table and seeds the initial row on startup if it doesn't exist.
+### React build fails on Railway
+- Ensure `npm run build` works locally first
+- Check `client/package.json` has all dependencies
+- Increase Railway memory limit if needed
+
+### API returns 500 error
+- Check Railway PostgreSQL is connected
+- Verify `DATABASE_URL` env var is set
+- Check Railway logs: `railway logs`
+
+---
+
+## 📝 License
+
+MIT
+
+---
+
+## 🎬 Next Steps
+
+1. Customize the website design
+2. Add real kinetic energy data from actual floor sensors
+3. Connect to real power grids or smart home systems
+4. Deploy to other platforms (Vercel, Heroku, AWS, Azure)
+
+**Made with ⚡ in Tokyo** 🇯🇵
