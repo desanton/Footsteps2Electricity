@@ -141,11 +141,11 @@ function RightPanel({ electricity, pulse }) {
   );
 }
 
+const API = typeof window !== 'undefined' && window.location.origin ? window.location.origin : 'http://localhost:4000';
+
 export default function App() {
   const [electricity, setElectricity] = useState(0);
   const [pulse, setPulse] = useState(false);
-
-  const API = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:4000';
 
   useEffect(() => {
     fetch(`${API}/electricity`)
