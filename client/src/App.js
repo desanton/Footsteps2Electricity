@@ -124,7 +124,7 @@ function RightPanel({ electricity, pulse }) {
         </p>
       </div>
       <div className="images-row">
-        <img src="/images/shocked.avif" alt="Shocked face" className="reaction-image" />
+        <img src="/images/shocked.png" alt="Shocked face" className="reaction-image" />
         <img src="/images/red-arrow.png" alt="Red arrow pointing up" className="reaction-image" />
       </div>
     
