@@ -59,46 +59,23 @@ function LeftPanel({ onGenerate }) {
   );
 }
 
+// Change this URL to your Instagram reel/post URL
+const INSTAGRAM_EMBED_URL = 'https://www.instagram.com/p/YOUR_POST_ID/embed/'; // Replace YOUR_POST_ID with actual post ID
+
 function CenterPanel() {
   return (
     <div className="panel panel-center">
-      <div className="video-card">
-        <div className="video-thumbnail">
-          <div className="video-bg-gradient" />
-          <div className="feet-visual">
-            <span className="feet-emoji">👣</span>
-          </div>
-          <button className="play-btn" aria-label="Play video">
-            <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-              <path d="M8 5v14l11-7z"/>
-            </svg>
-          </button>
-        </div>
-        <div className="video-footer">
-          <div className="video-info">
-            <div className="channel-row">
-              <div className="avatar" />
-              <span className="channel-name">@japan_energy_tech</span>
-            </div>
-            <h3 className="video-title">Footsteps → Electricity</h3>
-            <p className="video-subtitle">Kinetic energy conversion demo</p>
-            <p className="video-desc">Turning footsteps into electricity in Tokyo 🇯🇵⚡</p>
-          </div>
-          <div className="social-icons">
-            <div className="social-btn">
-              <span className="social-icon">❤️</span>
-              <span className="social-count">128K</span>
-            </div>
-            <div className="social-btn">
-              <span className="social-icon">💬</span>
-              <span className="social-count">2.4K</span>
-            </div>
-            <div className="social-btn">
-              <span className="social-icon">🔗</span>
-              <span className="social-count">Share</span>
-            </div>
-          </div>
-        </div>
+      <div className="instagram-embed-container">
+        <iframe
+          src={INSTAGRAM_EMBED_URL}
+          width="100%"
+          height="100%"
+          frameBorder="0"
+          scrolling="no"
+          allowTransparency="true"
+          className="instagram-iframe"
+          title="Instagram Reel"
+        />
       </div>
     </div>
   );
@@ -123,7 +100,7 @@ function RightPanel({ electricity, pulse }) {
         </p>
       </div>
       <div className="images-row">
-        <img src="/images/shocked.avif" alt="Shocked face" className="reaction-image" />
+        <img src="/images/shocked.avif" alt="Shocked face" className="reaction-image" onError={(e) => { e.target.style.display = 'none'; }} />
         <img src="/images/red-arrow.png" alt="Red arrow pointing up" className="reaction-image" />
       </div>
     </div>
