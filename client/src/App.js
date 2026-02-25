@@ -117,16 +117,17 @@ function RightPanel({ electricity, pulse }) {
           <span className="elec-bolt">⚡</span>
         </div>
       </div>
-    </div>
-  );  <div className="quote-section">
+      <div className="quote-section">
         <p className="quote-text">
           Japan🇯🇵 is turning footsteps into electricity! Using piezoelectric tiles, every step you take generates a small amount of energy. Millions of steps together can power LED lights and displays in busy places like Shibuya Station. A brilliant way to create a sustainable and smart city.
         </p>
       </div>
       <div className="images-row">
-        <img src="/images/shocked.png" alt="Shocked face" className="reaction-image" />
+        <img src="/images/shocked.avif" alt="Shocked face" className="reaction-image" />
         <img src="/images/red-arrow.png" alt="Red arrow pointing up" className="reaction-image" />
       </div>
+    </div>
+  );
     
 }
 
