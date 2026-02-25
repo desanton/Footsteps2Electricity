@@ -21,7 +21,7 @@ A production-ready full-stack web app that simulates generating electricity from
 ## 📁 Folder Structure
 
 ```
-footstep-app/
+Footsteps2Electricity/
 ├── client/                    # React frontend (CRA)
 │   ├── public/
 │   │   └── index.html        # HTML entry point
@@ -61,11 +61,11 @@ psql footsteps < schema.sql
 ### 2. Clone & Install
 
 ```bash
-cd footstep-app
+cd Footsteps2Electricity
 cp .env.example .env
 
-# Edit .env with your DB URL
-# Example: DATABASE_URL=postgresql://postgres:password@localhost:5432/footsteps
+# Edit .env with your DB URL (use your actual Neon or Railway PostgreSQL URL)
+# Example: DATABASE_URL=postgresql://user:password@host:5432/dbname
 
 npm install
 ```
@@ -94,19 +94,22 @@ The React app will proxy API calls to the backend automatically.
 
 ### 1. Prepare GitHub
 
-Ensure your repo is pushed to GitHub with the `footstep-app/` folder at root level:
+Ensure your repo is pushed to GitHub. The root of your repository should have:
 ```
 repo/
-├── footstep-app/       ← All code here
-└── README.md
+├── client/
+├── server/
+├── package.json       ← Root package.json with build + start scripts
+├── railway.toml
+└── .env  (NOT in git, set via Railway dashboard)
 ```
 
 ### 2. Create Railway Project
 
 1. Go to [railway.app](https://railway.app)
 2. Click **New Project** → **Deploy from GitHub**
-3. Select your repository
-4. Select the directory: `footstep-app`
+3. Select your **Footsteps2Electricity** repository
+4. Railway will auto-detect and use the root directory ✓
 
 ### 3. Add PostgreSQL
 
@@ -124,8 +127,8 @@ repo/
 
 ### 5. Deploy
 
-1. Connect your GitHub repo
-2. Select `footstep-app` as the root directory
+1. Railway will auto-detect your GitHub repo
+2. It will use the root directory (Footsteps2Electricity/) automatically
 3. Click **Deploy**
 
 Railway will:

@@ -1,4 +1,11 @@
-require('dotenv').config({ path: require('path').join(__dirname, '../.env') });
+// Load .env only if file exists (for local dev)
+// On Railway, env vars come from the dashboard
+try {
+  require('dotenv').config({ path: require('path').join(__dirname, '../.env') });
+} catch (err) {
+  // File doesn't exist, that's okay - Railway will provide env vars
+}
+
 const express = require('express');
 const { Pool } = require('pg');
 const cors = require('cors');
@@ -9,7 +16,15 @@ const app = express();
 // Parse DATABASE_URL safely
 const dbUrl = process.env.DATABASE_URL;
 if (!dbUrl) {
-  console.error('ERROR: DATABASE_URL not set in .env');
+  console.error('❌ ERROR: DATABASE_URL environment variable not set!');
+  console.error('\nLocal Dev Fix:');
+  console.error('  1. Create .env in project root with DATABASE_URL=...');
+  console.error('  2. Make sure it matches schema.sql');
+  console.error('\nRailway Fix:');
+  console.error('  1. Go to Railway dashboard');
+  console.error('  2. Add PostgreSQL service');
+  console.error('  3. Click "Connect" and copy the DATABASE_URL');
+  console.error('  4. Set it as an environment variable in your app service');
   process.exit(1);
 }
 

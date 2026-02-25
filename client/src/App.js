@@ -3,17 +3,14 @@ import './App.css';
 
 function JapanOutline() {
   return (
-    <svg viewBox="0 0 120 200" className="japan-svg" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M72,8 L78,14 L82,22 L80,30 L74,36 L70,44 L72,52 L68,60 L62,66 L58,74 L56,82 L60,90 L64,98 L66,108 L62,118 L58,126 L54,134 L52,144 L56,152 L60,160 L58,168 L54,176 L50,184 L46,190 L42,196 L36,196 L32,188 L30,178 L34,168 L38,158 L36,148 L32,138 L28,128 L26,118 L30,108 L34,98 L30,88 L26,78 L28,68 L34,60 L38,50 L40,40 L36,30 L38,20 L44,12 L52,8 L62,6 Z"
-        fill="none"
-        stroke="rgba(100,160,255,0.5)"
-        strokeWidth="1.5"
-        className="japan-path"
-      />
-      <circle cx="48" cy="80" r="2" fill="rgba(100,160,255,0.4)" />
-      <text x="44" y="76" fontSize="6" fill="rgba(100,160,255,0.5)" fontFamily="monospace">東京</text>
-    </svg>
+    <img
+      src="/images/japan.jpg"
+      alt="Japan map"
+      className="japan-image"
+      onError={(e) => {
+        e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdHRlcm4gaWQ9ImEiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPjxyZWN0IGZpbGw9IiMzYjgyZjYiIHdpZHRoPSIyIiBoZWlnaHQ9IjIiLz48L3BhdHRlcm4+PGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iMzAiIGZpbGw9InVybCgjYSkiIG9wYWNpdHk9IjAuNiIvPjwvc3ZnPg==';
+      }}
+    />
   );
 }
 
@@ -116,25 +113,9 @@ function RightPanel({ electricity, pulse }) {
         <h2 className="right-title">Electricity Generated</h2>
       </div>
       <div className={`electricity-card ${pulse ? 'pulse' : ''}`}>
-        <div className="card-top-row">
-          <span className="active-dot" />
-          <span className="active-label">ACTIVE</span>
-        </div>
         <div className="electricity-value">
           <span className="elec-number">{electricity}</span>
           <span className="elec-bolt">⚡</span>
-        </div>
-        <div className="unit-label">kilowatt steps</div>
-      </div>
-      <div className="stats-row">
-        <div className="stat-item">
-          <div className="stat-num">{Math.floor(electricity * 0.003 * 100) / 100}</div>
-          <div className="stat-lbl">kWh total</div>
-        </div>
-        <div className="stat-divider" />
-        <div className="stat-item">
-          <div className="stat-num">{electricity > 0 ? '🟢' : '⚫'}</div>
-          <div className="stat-lbl">grid status</div>
         </div>
       </div>
     </div>

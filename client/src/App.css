@@ -81,10 +81,12 @@ html, body, #root {
   gap: 0.25rem;
 }
 
-.japan-svg {
+.japan-svg,
+.japan-image {
   width: 80px;
   height: 130px;
   filter: drop-shadow(0 0 8px rgba(59,130,246,0.3));
+  object-fit: contain;
 }
 
 .japan-path {
@@ -349,34 +351,6 @@ html, body, #root {
   100% { box-shadow: 0 0 40px rgba(59,130,246,0.08), inset 0 1px 0 rgba(255,255,255,0.04); }
 }
 
-.card-top-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0.75rem;
-}
-
-.active-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--green);
-  box-shadow: 0 0 8px var(--green);
-  animation: dotPulse 2s ease-in-out infinite;
-}
-
-@keyframes dotPulse {
-  0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--green); }
-  50% { opacity: 0.5; box-shadow: 0 0 2px var(--green); }
-}
-
-.active-label {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.65rem;
-  color: var(--green);
-  letter-spacing: 0.15em;
-}
-
 .electricity-value {
   display: flex;
   align-items: center;
@@ -404,43 +378,6 @@ html, body, #root {
 }
 
 .elec-bolt { font-size: 2.5rem; }
-
-.unit-label {
-  font-size: 0.68rem;
-  color: var(--muted);
-  font-family: 'Space Mono', monospace;
-  letter-spacing: 0.1em;
-  margin-top: 0.5rem;
-}
-
-.stats-row {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  padding: 1rem 0.5rem;
-}
-
-.stat-item { text-align: center; }
-
-.stat-num {
-  font-family: 'Space Mono', monospace;
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--text);
-}
-
-.stat-lbl {
-  font-size: 0.65rem;
-  color: var(--muted);
-  letter-spacing: 0.08em;
-  margin-top: 0.15rem;
-}
-
-.stat-divider {
-  width: 1px;
-  height: 32px;
-  background: var(--border);
-}
 
 /* Responsive */
 @media (max-width: 900px) {
