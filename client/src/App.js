@@ -34,7 +34,6 @@ function LeftPanel({ onGenerate }) {
     <div className="panel panel-left">
       <div className="japan-container">
         <JapanOutline />
-        <div className="japan-label">日本</div>
       </div>
       <button
         className={`footstep-btn ${pressing ? 'pressing' : ''}`}
@@ -119,7 +118,16 @@ function RightPanel({ electricity, pulse }) {
         </div>
       </div>
     </div>
-  );
+  );  <div className="quote-section">
+        <p className="quote-text">
+          Japan🇯🇵 is turning footsteps into electricity! Using piezoelectric tiles, every step you take generates a small amount of energy. Millions of steps together can power LED lights and displays in busy places like Shibuya Station. A brilliant way to create a sustainable and smart city.
+        </p>
+      </div>
+      <div className="images-row">
+        <img src="/images/shocked.avif" alt="Shocked face" className="reaction-image" />
+        <img src="/images/red-arrow.png" alt="Red arrow pointing up" className="reaction-image" />
+      </div>
+    
 }
 
 const API = typeof window !== 'undefined' && window.location.origin ? window.location.origin : 'http://localhost:4000';

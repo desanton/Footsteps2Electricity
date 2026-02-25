@@ -98,13 +98,6 @@ html, body, #root {
   to { stroke: rgba(100,160,255,0.8); filter: drop-shadow(0 0 4px rgba(96,165,250,0.6)); }
 }
 
-.japan-label {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.65rem;
-  color: var(--muted);
-  letter-spacing: 0.15em;
-}
-
 .footstep-btn {
   position: relative;
   width: 140px;
@@ -378,6 +371,37 @@ html, body, #root {
 }
 
 .elec-bolt { font-size: 2.5rem; }
+
+/* Quote Section */
+.quote-section {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 1rem;
+}
+
+.quote-text {
+  font-size: 0.75rem;
+  color: var(--muted);
+  line-height: 1.5;
+  font-family: 'Syne', sans-serif;
+  text-align: left;
+  margin: 0;
+}
+
+/* Images Row */
+.images-row {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.reaction-image {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
 
 /* Responsive */
 @media (max-width: 900px) {
