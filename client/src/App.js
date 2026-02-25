@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import './App.css';
 
 function JapanOutline() {
@@ -59,23 +59,44 @@ function LeftPanel({ onGenerate }) {
   );
 }
 
-// Change this URL to your Instagram reel/post URL
-const INSTAGRAM_EMBED_URL = 'https://www.instagram.com/p/YOUR_POST_ID/embed/'; // Replace YOUR_POST_ID with actual post ID
+const INSTAGRAM_PERMALINK = 'https://www.instagram.com/reel/DU_o1n_ElVE/';
 
 function CenterPanel() {
+  const embedRef = useRef(null);
+
+  useEffect(() => {
+    const processEmbeds = () => {
+      if (window.instgrm?.Embeds?.process && embedRef.current) {
+        window.instgrm.Embeds.process();
+      }
+    };
+
+    const existingScript = document.querySelector('script[src="https://www.instagram.com/embed.js"]');
+    if (!existingScript) {
+      const script = document.createElement('script');
+      script.src = 'https://www.instagram.com/embed.js';
+      script.async = true;
+      script.onload = processEmbeds;
+      document.body.appendChild(script);
+      return;
+    }
+
+    processEmbeds();
+  }, []);
+
   return (
     <div className="panel panel-center">
-      <div className="instagram-embed-container">
-        <iframe
-          src={INSTAGRAM_EMBED_URL}
-          width="100%"
-          height="100%"
-          frameBorder="0"
-          scrolling="no"
-          allowTransparency="true"
-          className="instagram-iframe"
-          title="Instagram Reel"
-        />
+      <div className="instagram-embed-wrapper" ref={embedRef}>
+        <blockquote
+          className="instagram-media"
+          data-instgrm-captioned
+          data-instgrm-permalink={INSTAGRAM_PERMALINK}
+          data-instgrm-version="14"
+        >
+          <a href={INSTAGRAM_PERMALINK} target="_blank" rel="noreferrer">
+            View this post on Instagram
+          </a>
+        </blockquote>
       </div>
     </div>
   );

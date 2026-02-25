@@ -162,6 +162,25 @@ html, body, #root {
 }
 
 /* ---- CENTER PANEL ---- */
+.instagram-embed-wrapper {
+  width: 100%;
+  max-width: 420px;
+  height: calc(100vh - 3rem);
+  max-height: 680px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.instagram-embed-wrapper .instagram-media {
+  margin: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  border-radius: 24px !important;
+  overflow: hidden !important;
+}
+
 .video-card {
   width: 100%;
   max-width: 320px;
@@ -415,5 +434,10 @@ html, body, #root {
   .panel { padding: 2rem 1.5rem; min-height: 50vh; }
   .panel-center { min-height: 80vh; }
   .video-card { max-height: 600px; }
+  .instagram-embed-wrapper {
+    height: auto;
+    max-height: none;
+    max-width: 540px;
+  }
   .footstep-btn { width: 120px; height: 120px; }
 }
